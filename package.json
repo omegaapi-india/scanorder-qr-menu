@@ -1,0 +1,13 @@
+{
+  "name": "scanorder-qr-menu",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "QR menu and live order demo on Cloudflare Pages.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  }
+}

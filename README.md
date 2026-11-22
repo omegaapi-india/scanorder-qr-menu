@@ -241,6 +241,22 @@ This is a working demo, not a mockup. It can be rebranded for a restaurant, cafÃ
 
 ---
 
+## Demo access and data safety
+
+Every public demo is a **3-day free trial**. Access is enforced by a signed, HttpOnly cookie issued by a Cloudflare Pages Function. There is no payment form, card field, subscription, or paid API key in any demo.
+
+The cookie contains only a timestamp and a random nonce. No IP address, name, email, phone number, or order/booking/trade detail is stored in it. Customer-facing public pages and APIs continue to hide personal data, and existing data-retention rules still apply. Clearing browser cookies starts a fresh trial; a commercial deployment should add accounts and billing for hard entitlement control.
+
+Local development and deployment need one extra secret:
+
+```bash
+# add to .dev.vars
+DEMO_TRIAL_SECRET=replace-with-a-long-random-string
+
+# upload for production
+npx wrangler pages secret bulk .dev.vars --project-name scanorder
+```
+
 ## License
 
 MIT â€” free to use, modify, and show to clients.
