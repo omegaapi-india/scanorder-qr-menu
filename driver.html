@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="ScanOrder delivery partner console — share live location with customers.">
+  <meta name="author" content="Krishna Prakash Ojha (Leon) — OmegaAPI">
+  <title>ScanOrder — Driver Console</title>
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/driver.css">
+</head>
+<body>
+  <div class="driver-wrap">
+    <header class="driver-head">
+      <a class="brand" href="index.html">
+        <div class="brand-mark" aria-hidden="true">SQ</div>
+        <div>
+          <div class="brand-name">ScanOrder</div>
+          <div class="brand-sub">Delivery partner console</div>
+        </div>
+      </a>
+      <a class="back-link" href="index.html">← Menu</a>
+    </header>
+
+    <div class="driver-card">
+      <section id="driverLogin">
+        <h1>Start your delivery</h1>
+        <p class="driver-sub">Enter the order ID and the 6-digit driver code from the admin dashboard.</p>
+        <form id="loginForm" class="driver-form">
+          <label class="field"><span>Order ID</span><input id="driverOrderId" type="text" maxlength="12" autocomplete="off" placeholder="SO-A1B2C3D4"></label>
+          <label class="field"><span>Driver code</span><input id="driverCode" type="text" inputmode="numeric" maxlength="6" autocomplete="off" placeholder="123456"></label>
+          <button class="primary-btn" type="submit">Load order</button>
+        </form>
+        <p class="driver-error" id="driverError" hidden></p>
+      </section>
+
+      <section id="driverOrder" hidden>
+        <div class="order-head">
+          <div>
+            <p class="track-label">ASSIGNED ORDER</p>
+            <h1 id="driverOrderIdLabel">—</h1>
+          </div>
+          <span class="track-status" id="driverOrderMode">—</span>
+        </div>
+
+        <div class="driver-grid">
+          <div class="driver-info">
+            <h2>Delivery details</h2>
+            <p id="driverCustomer">—</p>
+            <p id="driverAddress">—</p>
+            <ul id="driverItems"></ul>
+            <div class="track-total"><span>Total</span><strong id="driverTotal">—</strong></div>
+            <p class="driver-note" id="driverNote" hidden></p>
+
+            <div class="sharing-box">
+              <span class="sharing-dot" id="sharingDot"></span>
+              <div>
+                <strong id="sharingTitle">Location sharing is off</strong>
+                <small id="sharingStatus">Start sharing so the customer can follow you on the map.</small>
+              </div>
+            </div>
+
+            <button class="primary-btn" id="startSharing" type="button">Start live tracking</button>
+            <button class="secondary-btn" id="stopSharing" type="button" hidden>Stop sharing</button>
+          </div>
+          <div class="driver-map-wrap">
+            <div id="driverMap" class="map" aria-label="Driver location map"></div>
+            <p class="map-caption">Your position is sent only while sharing is on, and expires with the order after 24 hours.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <p class="track-foot">Order-scoped driver code · No global secret in this page · Built by <a class="brand-link" href="https://omegaapi.com" target="_blank" rel="noopener noreferrer">OmegaAPI</a> · OpenStreetMap tiles</p>
+  </div>
+
+  <script src="assets/config.js"></script>
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="assets/driver.js"></script>
+</body>
+</html>

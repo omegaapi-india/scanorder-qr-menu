@@ -1,0 +1,84 @@
+/* ScanOrder — live tracking page */
+body { padding-bottom: 30px; }
+.track-wrap { max-width: 620px; margin: 0 auto; padding: 18px; }
+.track-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+.back-link { color: var(--accent-2); font-size: 12px; font-weight: 800; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+.track-card {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 20px; padding: 24px; box-shadow: var(--shadow);
+}
+.track-loading { text-align: center; color: var(--muted); font-size: 13px; padding: 40px 0; }
+.track-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.track-label { margin: 0 0 4px; color: var(--accent-2); font-size: 10px; font-weight: 900; letter-spacing: 1.6px; }
+.track-top h1 { margin: 0; font-size: 25px; letter-spacing: -.6px; }
+.track-meta { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
+.track-status {
+  flex: 0 0 auto; font-size: 11px; font-weight: 900; padding: 8px 12px; border-radius: 999px;
+  background: rgba(255,138,61,.14); color: var(--accent-2); border: 1px solid rgba(255,138,61,.3);
+}
+.track-status.done { background: rgba(53,211,153,.14); color: var(--green); border-color: rgba(53,211,153,.3); }
+.eta-box {
+  display: flex; align-items: center; gap: 12px; margin: 20px 0 24px;
+  background: rgba(106,168,255,.08); border: 1px solid rgba(106,168,255,.22);
+  border-radius: 13px; padding: 13px 15px;
+}
+.eta-icon { font-size: 22px; }
+.eta-box strong { display: block; font-size: 15px; }
+.eta-box span { color: var(--muted); font-size: 11px; }
+.timeline { list-style: none; margin: 0 0 26px; padding: 0; }
+.timeline li { display: flex; gap: 13px; min-height: 52px; position: relative; }
+.timeline li::before {
+  content: ''; position: absolute; left: 11px; top: 26px; bottom: 0;
+  width: 2px; background: var(--line);
+}
+.timeline li:last-child::before { display: none; }
+.timeline .node {
+  width: 24px; height: 24px; border-radius: 50%; flex: 0 0 auto; z-index: 1;
+  display: grid; place-items: center; font-size: 11px; font-weight: 900;
+  background: var(--panel-2); border: 2px solid var(--line); color: var(--muted);
+}
+.timeline li.done .node { background: var(--green); border-color: var(--green); color: #06281b; }
+.timeline li.active .node { background: var(--accent); border-color: var(--accent); color: #2a1400; box-shadow: 0 0 0 5px rgba(255,138,61,.13); }
+.timeline .step-text { padding-top: 2px; }
+.timeline .step-text strong { display: block; font-size: 13px; }
+.timeline li:not(.done):not(.active) .step-text strong { color: var(--muted); }
+.timeline .step-text small { color: var(--muted); font-size: 10px; }
+.track-details { border-top: 1px solid var(--line); padding-top: 18px; }
+.track-details h2 { margin: 0 0 10px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+.track-details ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+.track-details li { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; }
+.track-details li span { color: var(--muted); }
+.track-total {
+  display: flex; justify-content: space-between; margin-top: 14px; padding-top: 13px;
+  border-top: 1px dashed var(--line); font-size: 14px;
+}
+.track-total strong { font-size: 18px; }
+.track-note { color: var(--muted); font-size: 11px; margin: 12px 0 0; }
+.track-error { text-align: center; padding: 28px 10px; }
+.error-icon {
+  width: 44px; height: 44px; border-radius: 50%; margin: 0 auto 14px;
+  display: grid; place-items: center; background: rgba(255,107,107,.13);
+  color: var(--red); font-weight: 900; font-size: 20px;
+}
+.track-error h2 { margin: 0 0 8px; font-size: 19px; }
+.track-error p { color: var(--muted); font-size: 12px; line-height: 1.5; margin: 0 0 20px; }
+.id-form { display: grid; gap: 10px; max-width: 280px; margin: 0 auto 18px; text-align: left; }
+.track-submit {
+  border: 0; border-radius: 11px; padding: 12px; font-weight: 800; font-size: 13px;
+  background: var(--accent); color: #2a1400;
+}
+.track-foot { text-align: center; color: var(--muted); font-size: 10px; margin-top: 16px; }
+/* Live map */
+.map-block { margin: 20px 0 24px; }
+.map { height: 280px; border-radius: 14px; border: 1px solid var(--line); background: var(--bg-2); }
+.map-status { margin: 9px 0 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
+.leaflet-container { font-family: inherit; background: #10162a; }
+.vehicle-icon { font-size: 26px; line-height: 32px; text-align: center; filter: drop-shadow(0 3px 4px rgba(0,0,0,.45)); }
+.pin-icon { font-size: 22px; line-height: 30px; text-align: center; }
+.leaflet-control-attribution { font-size: 9px !important; }
+
+@media (max-width: 520px) {
+  .track-card { padding: 18px; }
+  .track-top h1 { font-size: 21px; }
+}

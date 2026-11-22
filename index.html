@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="ScanOrder — QR menu, online ordering, and live delivery tracking.">
+  <meta name="author" content="Krishna Prakash Ojha (Leon) — OmegaAPI">
+  <title>ScanOrder — Menu</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">SQ</div>
+        <div>
+          <div class="brand-name">ScanOrder</div>
+          <div class="brand-sub">Scan. Select. Order.</div>
+        </div>
+      </div>
+      <div class="table-pill" id="tablePill">Table —</div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <p class="eyebrow">OMEGAAPI · SCANORDER DEMO</p>
+        <h1>What are you craving today?</h1>
+        <p class="hero-sub">Order online for pickup or home delivery, then watch it move from the kitchen to your door. No app install, no signup.</p>
+        <div class="hero-badges">
+          <span class="badge">Online ordering</span>
+          <span class="badge">Live tracking</span>
+          <span class="badge">Email &amp; Telegram fallback</span>
+        </div>
+      </div>
+    </section>
+
+    <nav class="chips" id="categories" aria-label="Menu categories"></nav>
+
+    <main class="menu-grid" id="menu"></main>
+
+    <footer class="footer">
+      <div class="footer-brand">ScanOrder <span>· demo by <a class="brand-link" href="https://omegaapi.com" target="_blank" rel="noopener noreferrer">OmegaAPI</a></span></div>
+      <div class="footer-note">Order details are kept for 24 hours only. No cookies, no tracking.</div>
+      <a class="footer-link" href="track.html">Track an order →</a>
+      <a class="footer-link" href="admin/">Admin dashboard demo →</a>
+      <a class="hire-cta" href="mailto:info@omegaapi.com?subject=ScanOrder%20demo%20inquiry">Email about your project →</a>
+      <a class="hire-cta telegram-cta" href="https://t.me/Omegaapiofficial" target="_blank" rel="noopener noreferrer">Message on Telegram →</a>
+    </footer>
+  </div>
+
+  <div class="cart-bar" id="cartBar" hidden>
+    <button class="cart-summary" id="cartSummary" type="button" aria-label="Open cart">
+      <span class="cart-count" id="cartCount">0</span>
+      <span class="cart-summary-text">
+        <strong id="cartTotal">₹0</strong>
+        <small id="cartItemsLabel">Cart is empty</small>
+      </span>
+    </button>
+    <button class="cart-open" id="cartOpen" type="button">View cart <span aria-hidden="true">→</span></button>
+  </div>
+
+  <div class="sheet-backdrop" id="cartBackdrop" hidden></div>
+  <aside class="cart-sheet" id="cartSheet" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
+    <div class="sheet-main">
+      <div class="sheet-head">
+        <div>
+          <p class="sheet-eyebrow">Your order</p>
+          <h2 id="cartTitle">Cart</h2>
+        </div>
+        <button class="icon-btn" id="cartClose" type="button" aria-label="Close cart">✕</button>
+      </div>
+
+      <div class="cart-body" id="cartBody"></div>
+
+      <div class="cart-fields">
+        <div class="mode-switch" role="group" aria-label="Order type">
+          <button class="mode-btn is-active" data-mode="table" type="button">Table pickup</button>
+          <button class="mode-btn" data-mode="delivery" type="button">Home delivery</button>
+        </div>
+
+        <div class="delivery-fields" id="deliveryFields" hidden>
+          <label class="field">
+            <span>Phone number</span>
+            <input id="customerPhone" type="tel" inputmode="tel" maxlength="16" autocomplete="tel" placeholder="+91 82990 75171">
+          </label>
+          <label class="field">
+            <span>Delivery address</span>
+            <input id="customerAddress" type="text" maxlength="160" autocomplete="street-address" placeholder="House no., street, area, city">
+          </label>
+        </div>
+
+        <label class="field">
+          <span>Your name <small>(optional)</small></span>
+          <input id="customerName" type="text" maxlength="40" autocomplete="name" placeholder="e.g. Rahul">
+        </label>
+        <label class="field">
+          <span>Special note <small>(optional)</small></span>
+          <input id="orderNote" type="text" maxlength="120" placeholder="e.g. less spicy, extra napkins">
+        </label>
+      </div>
+
+      <div class="sheet-foot">
+        <div class="total-row">
+          <span>Total</span>
+          <strong id="sheetTotal">₹0</strong>
+        </div>
+        <p class="sheet-hint">Online orders are visible to the restaurant only and are deleted automatically after 24 hours.</p>
+        <button class="contact-btn online-btn" id="placeOnline" type="button">Place order online</button>
+        <a class="contact-btn email-btn" id="emailOrderBtn" href="mailto:info@omegaapi.com" aria-disabled="true">
+          <span aria-hidden="true">✉</span> Send order by email
+        </a>
+        <a class="contact-btn telegram-btn" id="telegramBtn" href="https://t.me/Omegaapiofficial" target="_blank" rel="noopener noreferrer">
+          <span aria-hidden="true">➤</span> Message on Telegram
+        </a>
+        <p class="inline-error" id="orderError" hidden></p>
+        <button class="clear-btn" id="clearCart" type="button">Clear cart</button>
+      </div>
+    </div>
+
+    <div class="success-view" id="successView" hidden>
+      <div class="success-icon" aria-hidden="true">✓</div>
+      <h2>Order placed!</h2>
+      <p class="success-id">Order <strong id="placedId">—</strong> is confirmed.</p>
+      <p class="success-eta" id="placedEta"></p>
+      <a class="contact-btn" id="trackBtn" href="#">Track your order →</a>
+      <button class="ghost-btn" id="copyTrackLink" type="button">Copy tracking link</button>
+      <button class="clear-btn" id="newOrder" type="button">Place another order</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/config.js"></script>
+  <script src="assets/menu.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

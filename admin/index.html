@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="author" content="Krishna Prakash Ojha (Leon) — OmegaAPI">
+  <meta name="robots" content="noindex, nofollow">
+  <title>ScanOrder — Admin Dashboard (Demo)</title>
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="side-brand">
+        <div class="side-mark">SQ</div>
+        <div><strong>ScanOrder</strong><small>Admin console</small></div>
+      </div>
+      <nav class="side-nav" aria-label="Admin navigation">
+        <a class="side-link is-active" href="#overview">Overview</a>
+        <a class="side-link" href="#orders">Orders</a>
+        <a class="side-link" href="#menu">Menu</a>
+        <a class="side-link" href="#qr">QR Codes</a>
+        <a class="side-link" href="#security">Security</a>
+      </nav>
+      <div class="side-foot">
+        <div class="demo-dot"></div>
+        <div><strong>Demo mode</strong><small>Read-only data</small></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="main-head">
+        <div>
+          <p class="crumb">Dashboard / Overview</p>
+          <h1>Welcome back 👋</h1>
+          <p class="sub">Today at a glance — every number below is demo data.</p>
+        </div>
+        <div class="head-actions">
+          <span class="live-chip"><span class="live-dot"></span> Static site · Live</span>
+          <a class="ghost-btn" href="../">View menu ↗</a>
+        </div>
+      </header>
+
+      <div class="demo-banner">
+        <span class="demo-badge">DEMO DATA</span>
+        <span>This is a read-only showcase. Real orders arrive by email and Telegram — which is why there is no login and no database here.</span>
+      </div>
+
+      <section class="stats" id="overview" aria-label="Key metrics">
+        <article class="stat">
+          <div class="stat-icon orange">🧾</div>
+          <p>Orders today</p><strong>24</strong><small class="up">↑ 18% vs. yesterday</small>
+        </article>
+        <article class="stat">
+          <div class="stat-icon green">₹</div>
+          <p>Revenue today</p><strong>₹8,460</strong><small class="up">↑ 12% vs. yesterday</small>
+        </article>
+        <article class="stat">
+          <div class="stat-icon blue">⌀</div>
+          <p>Avg. order</p><strong>₹352</strong><small class="muted">last 7 days</small>
+        </article>
+        <article class="stat">
+          <div class="stat-icon red">⏳</div>
+          <p>Pending</p><strong>5</strong><small class="muted">by email / Telegram</small>
+        </article>
+      </section>
+
+      <section class="panel" id="live" aria-labelledby="liveTitle">
+        <div class="panel-head">
+          <div><h2 id="liveTitle">Live online orders</h2><p>Refreshed from the API every 10 seconds. Customer details are visible only after authentication.</p></div>
+          <span class="panel-tag" id="liveState">Locked</span>
+        </div>
+        <div class="live-gate" id="liveGate">
+          <label class="field"><span>Admin token</span><input id="adminToken" type="password" maxlength="128" autocomplete="off" placeholder="Server admin token"></label>
+          <button class="ghost-btn" id="adminUnlock" type="button">Unlock live orders</button>
+          <button class="link-btn" id="demoOnly" type="button">Show demo data only</button>
+          <p class="live-hint" id="gateHint"></p>
+        </div>
+        <div id="liveContent" hidden>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Order</th><th>Type</th><th>Customer</th><th>Driver code</th><th>Items</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead>
+              <tbody id="liveBody"></tbody>
+            </table>
+          </div>
+          <p class="live-hint" id="liveHint"></p>
+        </div>
+      </section>
+
+      <div class="grid-2">
+        <section class="panel" aria-labelledby="salesTitle">
+          <div class="panel-head">
+            <div><h2 id="salesTitle">Sales — last 7 days</h2><p>Demo chart, built with pure CSS.</p></div>
+            <span class="panel-tag">This week</span>
+          </div>
+          <div class="chart" id="chart" aria-label="Weekly sales bar chart"></div>
+        </section>
+
+        <section class="panel" id="menu" aria-labelledby="topTitle">
+          <div class="panel-head">
+            <div><h2 id="topTitle">Top selling items</h2><p>Most ordered this week.</p></div>
+          </div>
+          <ul class="top-list" id="topList"></ul>
+        </section>
+      </div>
+
+      <section class="panel" id="orders" aria-labelledby="ordersTitle">
+        <div class="panel-head">
+          <div><h2 id="ordersTitle">Recent orders</h2><p>Sample records — in the real flow these come from email and Telegram.</p></div>
+          <span class="panel-tag">Today</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Order</th><th>Table</th><th>Items</th><th>Amount</th><th>Status</th></tr></thead>
+            <tbody id="ordersBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="grid-2" id="qr">
+        <section class="panel">
+          <div class="panel-head"><div><h2>Table QR codes</h2><p>One unique QR per table — the table number is encoded in the link.</p></div></div>
+          <div class="qr-info">
+            <div class="qr-box" aria-hidden="true">
+              <div class="qr-grid" id="qrGrid"></div>
+            </div>
+            <div>
+              <p class="qr-label">Example link</p>
+              <code id="qrLink">https://your-site.pages.dev/?table=04</code>
+              <p class="qr-note">After deployment, replace this with your real domain, then generate a QR image and print it.</p>
+              <p class="qr-note"><strong>Table filter:</strong> <code>?table=04</code> accepts only A–Z, 0–9, dash and underscore.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="security">
+          <div class="panel-head"><div><h2>Security posture</h2><p>Why this setup is hard to hack.</p></div></div>
+          <ul class="secure-list">
+            <li><span>✓</span><div><strong>No server, no database</strong><small>There is no endpoint to attack.</small></div></li>
+            <li><span>✓</span><div><strong>Zero secrets in the browser</strong><small>No API keys or tokens in the frontend.</small></div></li>
+            <li><span>✓</span><div><strong>Strict CSP + HTTPS</strong><small>Security headers are configured in <code>_headers</code>.</small></div></li>
+            <li><span>✓</span><div><strong>No third-party scripts</strong><small>No analytics, font CDN, or trackers.</small></div></li>
+            <li><span>✓</span><div><strong>Input sanitized</strong><small>Table parameter is whitelisted and text is encoded before it reaches the order email.</small></div></li>
+          </ul>
+        </section>
+      </div>
+
+      <footer class="main-foot">
+        ScanOrder · Demo project · No customer data collected or stored.<br>
+        Built by <a class="brand-link" href="https://omegaapi.com" target="_blank" rel="noopener noreferrer">OmegaAPI</a> · Krishna Prakash Ojha (Leon)
+        <a class="hire-cta" href="mailto:info@omegaapi.com?subject=ScanOrder%20demo%20inquiry">Email about your project →</a>
+        <a class="hire-cta telegram-cta" href="https://t.me/Omegaapiofficial" target="_blank" rel="noopener noreferrer">Message on Telegram →</a>
+      </footer>
+    </main>
+  </div>
+  <script src="assets/admin.js"></script>
+</body>
+</html>

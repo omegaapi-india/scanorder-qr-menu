@@ -1,0 +1,50 @@
+/* ScanOrder — delivery partner console */
+.driver-wrap { max-width: 1000px; margin: 0 auto; padding: 18px; }
+.driver-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+.driver-card {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: 20px; padding: 26px; box-shadow: var(--shadow);
+}
+.driver-card h1 { margin: 0 0 8px; font-size: 25px; letter-spacing: -.6px; }
+.driver-sub, .driver-note { color: var(--muted); font-size: 12px; line-height: 1.5; }
+.driver-sub { max-width: 520px; margin: 0 0 20px; }
+.driver-form { display: grid; gap: 12px; max-width: 360px; }
+.primary-btn {
+  border: 0; border-radius: 11px; padding: 13px 16px; font-weight: 900;
+  font-size: 13px; background: var(--accent); color: #2a1400;
+}
+.primary-btn:hover { background: var(--accent-2); }
+.primary-btn:disabled { opacity: .5; }
+.secondary-btn {
+  margin-top: 9px; background: transparent; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 11px; padding: 10px 15px;
+  font-weight: 800; font-size: 12px;
+}
+.driver-error { color: var(--red); font-size: 12px; margin: 14px 0 0; }
+.driver-error[hidden] { display: none; }
+.order-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 20px; }
+.driver-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 20px; }
+.driver-info h2 { margin: 0 0 10px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+.driver-info p { margin: 3px 0; font-size: 12px; line-height: 1.5; }
+.driver-info ul { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 6px; }
+.driver-info li { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; }
+.driver-info li span { color: var(--muted); }
+.sharing-box {
+  display: flex; align-items: center; gap: 11px; margin: 18px 0 14px;
+  background: var(--panel-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px;
+}
+.sharing-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); flex: 0 0 auto; }
+.sharing-dot.live { background: var(--green); box-shadow: 0 0 0 5px rgba(53,211,153,.14); }
+.sharing-box strong { display: block; font-size: 12px; }
+.sharing-box small { display: block; color: var(--muted); font-size: 10px; margin-top: 2px; line-height: 1.4; }
+.driver-map-wrap { min-width: 0; }
+.map { height: 360px; border-radius: 14px; border: 1px solid var(--line); background: var(--bg-2); }
+.map-caption { color: var(--muted); font-size: 10px; line-height: 1.5; margin: 9px 0 0; }
+.leaflet-container { font-family: inherit; background: #10162a; }
+.vehicle-icon { font-size: 26px; line-height: 32px; text-align: center; filter: drop-shadow(0 3px 4px rgba(0,0,0,.4)); }
+.pin-icon { font-size: 22px; line-height: 30px; text-align: center; }
+@media (max-width: 760px) {
+  .driver-card { padding: 18px; }
+  .driver-grid { grid-template-columns: 1fr; }
+  .map { height: 280px; }
+}

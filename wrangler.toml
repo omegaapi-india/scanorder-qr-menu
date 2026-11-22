@@ -1,0 +1,14 @@
+name = "scanorder"
+compatibility_date = "2026-11-22"
+pages_build_output_dir = "."
+
+# Live KV namespace for orders and GPS trails (free tier).
+# Namespace ID is public by design; the data inside is not.
+# Created with: npx wrangler kv namespace create scanorder-orders --binding ORDERS
+[[kv_namespaces]]
+binding = "ORDERS"
+id = "474af81aea224b5a80a5f5ffa0e7c63b"
+
+# ADMIN_TOKEN is a secret, never a plain variable:
+#   npx wrangler pages secret put ADMIN_TOKEN --project-name scanorder
+# For local testing, copy .dev.vars.example to .dev.vars and edit it.

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Track your ScanOrder order in real time.">
+  <meta name="author" content="Krishna Prakash Ojha (Leon) — OmegaAPI">
+  <title>ScanOrder — Track order</title>
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/track.css">
+</head>
+<body>
+  <div class="track-wrap">
+    <header class="track-head">
+      <a class="brand" href="index.html">
+        <div class="brand-mark" aria-hidden="true">SQ</div>
+        <div>
+          <div class="brand-name">ScanOrder</div>
+          <div class="brand-sub">Live order tracking</div>
+        </div>
+      </a>
+      <a class="back-link" href="index.html">← Menu</a>
+    </header>
+
+    <div class="track-card" id="trackCard">
+      <div class="track-loading" id="trackLoading">Loading your order…</div>
+
+      <div id="trackContent" hidden>
+        <div class="track-top">
+          <div>
+            <p class="track-label">ORDER</p>
+            <h1 id="trackId">—</h1>
+            <p class="track-meta" id="trackMeta"></p>
+          </div>
+          <span class="track-status" id="trackStatus">—</span>
+        </div>
+
+        <div class="eta-box">
+          <div class="eta-icon" aria-hidden="true">⏱</div>
+          <div>
+            <strong id="etaValue">—</strong>
+            <span id="etaText">Estimated preparation and delivery time</span>
+          </div>
+        </div>
+
+        <div class="map-block">
+          <div id="trackMap" class="map" aria-label="Live delivery map"></div>
+          <p class="map-status" id="mapStatus">Waiting for the delivery partner to start sharing location…</p>
+        </div>
+
+        <ol class="timeline" id="timeline" aria-label="Order progress"></ol>
+
+        <div class="track-details">
+          <h2>Items</h2>
+          <ul id="trackItems"></ul>
+          <div class="track-total"><span>Total</span><strong id="trackTotal">—</strong></div>
+          <p class="track-note" id="trackNote" hidden></p>
+        </div>
+      </div>
+
+      <div class="track-error" id="trackError" hidden>
+        <div class="error-icon" aria-hidden="true">!</div>
+        <h2 id="errorTitle">Order not found</h2>
+        <p id="errorText"></p>
+        <form id="idForm" class="id-form">
+          <label class="field">
+            <span>Order ID</span>
+            <input id="idInput" type="text" maxlength="12" placeholder="SO-A1B2C3D4" autocomplete="off">
+          </label>
+          <button class="track-submit" type="submit">Track order</button>
+        </form>
+        <a class="back-link" href="index.html">Back to menu</a>
+      </div>
+    </div>
+
+    <p class="track-foot">Auto-refreshes every 5 seconds · No personal details are shown on this page. Built by <a class="brand-link" href="https://omegaapi.com" target="_blank" rel="noopener noreferrer">OmegaAPI</a>.</p>
+    <p class="track-cta-row">
+      <a class="hire-cta" href="mailto:info@omegaapi.com?subject=ScanOrder%20demo%20inquiry">Email about your project →</a>
+      <a class="hire-cta telegram-cta" href="https://t.me/Omegaapiofficial" target="_blank" rel="noopener noreferrer">Message on Telegram →</a>
+    </p>
+  </div>
+
+  <script src="assets/config.js"></script>
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="assets/track.js"></script>
+</body>
+</html>
